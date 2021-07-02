@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Link from "next/Link";
+import Links from "../components/Links";
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
 
       <main>
         <h1 className="title">
-          Read <Link href="/posts/20210705">this page</Link>
+          Read <Links />
         </h1>
 
         <p className="description">

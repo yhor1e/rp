@@ -1,3 +1,10 @@
+import Links from "../../components/Links";
+
 export default function First() {
-  return <p>First Post</p>;
+  return (
+    <>
+      <Links />
+      <p>First Post</p>
+    </>
+  );
 }
