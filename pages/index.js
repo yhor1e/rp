@@ -1,7 +1,18 @@
 import Head from "next/head";
 import Links from "../components/links";
 
-export default function Home() {
+import { getSortedPostsData } from "../lib/posts";
+
+export async function getStaticProps() {
+  const allPostsData = getSortedPostsData();
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+}
+
+export default function Home({ allPostsData }) {
   return (
     <div className="container">
       <Head>
@@ -13,6 +24,22 @@ export default function Home() {
         <h1 className="title">
           Read <Links />
         </h1>
+
+        {/* Add this <section> tag below the existing <section> tag */}
+        <section>
+          <h2>Blog</h2>
+          <ul>
+            {allPostsData.map(({ id, date, title }) => (
+              <li key={id}>
+                {title}
+                <br />
+                {id}
+                <br />
+                {date}
+              </li>
+            ))}
+          </ul>
+        </section>
 
         <p className="description">
           Get started by editing <code>pages/index.js</code>
