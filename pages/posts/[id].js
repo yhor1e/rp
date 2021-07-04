@@ -1,14 +1,28 @@
 import Layout from "../../components/layout";
-import { getAllPostIds, getPostData } from "../../lib/posts";
+import {
+  getSortedPostsData,
+  getAllPostIds,
+  getPostData,
+} from "../../lib/posts";
+import Head from "next/head";
+import Link from "next/link";
 
-export default function Post({ postData }) {
+export default function Post({ postData, allPostsData }) {
   return (
     <Layout>
-      {postData.title}
-      <br />
-      {postData.id}
-      <br />
-      {postData.date}
+      <Head>
+        <title>{postData.id}</title>
+      </Head>
+      <ul>
+        {allPostsData.map(({ id }) => (
+          <li key={id}>
+            <Link href={`/posts/${id}`}>
+              <a>{id}</a>
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
     </Layout>
   );
 }
@@ -16,7 +30,6 @@ export default function Post({ postData }) {
 export async function getStaticPaths() {
   // Return a list of possible value for id
   const paths = getAllPostIds();
-  console.log(paths);
   return {
     paths,
     fallback: false,
@@ -24,10 +37,13 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const postData = getPostData(params.id);
+  const postData = await getPostData(params.id);
+  const allPostsData = getSortedPostsData();
+
   return {
     props: {
       postData,
+      allPostsData,
     },
   };
 }
