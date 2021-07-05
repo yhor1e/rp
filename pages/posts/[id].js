@@ -1,4 +1,5 @@
 import Layout from "../../components/layout";
+import SearchBox from "../../components/searchbox";
 import {
   getSortedPostsData,
   getAllPostIds,
@@ -14,7 +15,8 @@ export default function Post({ postData, allPostsData }) {
         <title>{postData.id}</title>
       </Head>
       <div className="flex">
-        <div className="w-1/6">
+        <div className="w-2/6">
+          <SearchBox />
           <ul>
             {allPostsData.map(({ id }) => (
               <li key={id}>
@@ -26,7 +28,7 @@ export default function Post({ postData, allPostsData }) {
           </ul>
         </div>
         <div
-          className="w-5/6"
+          className="w-4/6"
           dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
         />
       </div>
