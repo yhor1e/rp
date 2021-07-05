@@ -13,16 +13,23 @@ export default function Post({ postData, allPostsData }) {
       <Head>
         <title>{postData.id}</title>
       </Head>
-      <ul>
-        {allPostsData.map(({ id }) => (
-          <li key={id}>
-            <Link href={`/posts/${id}`}>
-              <a>{id}</a>
-            </Link>
-          </li>
-        ))}
-      </ul>
-      <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+      <div className="flex">
+        <div className="w-1/6">
+          <ul>
+            {allPostsData.map(({ id }) => (
+              <li key={id}>
+                <Link href={`/posts/${id}`}>
+                  <a>{id}</a>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div
+          className="w-5/6"
+          dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
+        />
+      </div>
     </Layout>
   );
 }
