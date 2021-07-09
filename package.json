@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start"
+    "start": "cross-env NODE_ENV=production node server.js"
   },
   "dependencies": {
+    "express": "^4.17.1",
     "gray-matter": "^4.0.3",
     "lunr": "^2.3.9",
     "next": "^10.0.0",
@@ -17,6 +18,10 @@
     "remark-html": "^13.0.1"
   },
   "devDependencies": {
-    "pino": "^6.11.3"
+    "autoprefixer": "^10.2.6",
+    "cross-env": "^7.0.3",
+    "pino": "^6.11.3",
+    "postcss": "^8.3.5",
+    "tailwindcss": "^2.2.4"
   }
 }
